@@ -12,6 +12,18 @@ export type SourceFinding = {
   snippet: string
 }
 
+/** 화면 검사가 그린 페이지 안 한 요소를 가리키는 위반. */
+export type PageFinding = {
+  ruleId: RuleId
+  /** 설정에 적은 경로(`/search?q=…`). */
+  route: string
+  /** 창 폭(px). */
+  viewport: number
+  /** 요소를 다시 찾을 수 있는 CSS 셀렉터. 페이지 전체를 가리키면 `:root`다. */
+  selector: string
+  snippet: string
+}
+
 /** 엔진에 넘기는 파일 하나. */
 export type SourceText = {
   /** 대상 레포 기준 상대 경로, `/` 구분. */

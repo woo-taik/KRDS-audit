@@ -27,8 +27,11 @@ export type Rule = {
   fix: string
 }
 
-/** 규칙 하나의 판정 — KRDS 자체 점검표의 칸(준수·미준수·해당 없음)에 수동 점검을 더했다. */
-export type Verdict = 'pass' | 'fail' | 'not-applicable' | 'manual'
+/**
+ * 규칙 하나의 판정 — KRDS 자체 점검표의 칸(준수·미준수·해당 없음)에 수동 점검과 검사 안 함을 더했다.
+ * `not-run`은 엔진을 돌리지 않은 것(화면 검사에 `--url`이 없을 때)이라 해당 없음과 섞지 않는다.
+ */
+export type Verdict = 'pass' | 'fail' | 'not-applicable' | 'not-run' | 'manual'
 
 export type CatalogProblem =
   | 'duplicate-id'
