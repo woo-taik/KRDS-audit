@@ -30,3 +30,8 @@ pnpm만 쓴다.
 - 타입은 `type`(`consistent-type-definitions`), 삼항 중첩 금지, 없음은 `null`(`undefined`는 엔진이 돌려준 것을 견줄 때만 — 테스트는 예외).
 - 배럴(`index.ts`) 없이 정의한 파일을 직접 import한다. ESM이라 상대 경로에 `.js`를 붙인다.
 - 주석은 한 줄, **왜**만 적는다.
+
+## law 골든
+
+`KRDS_GOLDEN_LAW=C:\dev\law\frontend pnpm test`일 때만 `src/golden/law-golden.test.ts`가 돈다. 기대값(`krds-golden.json`)과 설정(`krds.config.json`)은 law 작업 트리에, 소스는 골든에 적힌 커밋에서 `git show`로 읽는다.
+`snapshot`은 엔진을 다 만든 뒤 한 번 기록한다 — 그 전에는 `verdicts`·`mustFind`만 견준다.

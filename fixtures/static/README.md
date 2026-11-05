@@ -6,3 +6,12 @@
 - `pass.tsx`: 위반이 하나도 나오면 안 된다.
 - 주석 자리: JS 줄 끝은 `// ✗`, JSX 여는 태그 안은 `/* ✗ */`, JSX 자식 자리는 `{/* ✗ */}`.
 - 검사 대상 레포의 코드를 옮기지 않는다. 같은 패턴을 새로 짓는다.
+
+위반의 `snippet`(식별자 재료라 바뀌면 기준선이 깨진다):
+
+| 규칙 | snippet |
+|---|---|
+| 클래스 규칙(px·최소 크기·disabled 투명도·motion-reduce) | 토큰 원문(`md:text-[28px]`, `disabled:opacity-40`) |
+| navigation-is-link · no-change-on-input · visible-label | 태그 이름(`button`·`select`·`textarea`) |
+| no-hash-href | href 값(`#`, `javascript:void(0)`) |
+| placeholder-no-hint | 문자열 값 그대로 |
