@@ -1,0 +1,11 @@
+/* ✗ 서체 선언이 없다 */
+@import 'tailwindcss';
+
+@theme {
+  --text-base: 1.0625rem;
+  --font-sans: initial;
+}
+
+.title {
+  font-family: serif;
+}

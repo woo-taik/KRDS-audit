@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      postcss:
+        specifier: ^8.5.32
+        version: 8.5.32
       typescript:
         specifier: ~6.0.3
         version: 6.0.3

@@ -1,10 +1,5 @@
+import type { SourceText } from '../types.js'
 import type { StaticConfig, StaticFinding, StaticRule } from './types.js'
-
-export type SourceText = {
-  /** 대상 레포 기준 상대 경로, `/` 구분. */
-  file: string
-  text: string
-}
 
 export type RunStaticOptions = {
   rules: readonly StaticRule[]

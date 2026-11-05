@@ -97,7 +97,8 @@ export const RULES = [
     engine: 'css',
     level: 'required',
     basis: [B.KRDS_TYPOGRAPHY, B.WCAG_RESIZE_TEXT],
-    detect: '`@theme`의 `--text-*` 크기 값(줄 높이·자간 제외)이 px',
+    detect:
+      '대상 CSS `@theme`의 `--text-<이름>` 값(`--text-<이름>--*` 하위 토큰 제외)에 px가 들어 있다. `@theme` 밖의 같은 이름 변수는 토큰이 아니라 보지 않는다',
     fix: 'rem으로 바꾼다(17px → 1.0625rem)',
   },
   {
@@ -106,7 +107,8 @@ export const RULES = [
     engine: 'css',
     level: 'required',
     basis: [B.KRDS_TYPOGRAPHY],
-    detect: '`@theme`의 `--font-sans`, 또는 html·body의 font-family 선언이 없다',
+    detect:
+      '대상 CSS 어디에도 `@theme`의 `--font-sans`·`--default-font-family`(값이 `initial`이 아닌 것), `html`·`body`·`:root` 선택자의 `font-family`가 없다. Tailwind 기본 테마의 선언은 치지 않는다',
     fix: '`--font-sans`에 Pretendard GOV(없으면 고딕 계열)를 첫 자리로 둔다',
   },
   {
@@ -116,7 +118,7 @@ export const RULES = [
     level: 'recommended',
     basis: [B.WCAG_ANIMATION],
     detect:
-      '`@media (prefers-reduced-motion: reduce)` 안에 전체 선택자(`*`)로 transition·animation을 끄는 선언이 없다',
+      '`prefers-reduced-motion: reduce` 미디어 쿼리(중첩 위치 무관) 안에서 선택자 목록에 `*`가 든 규칙들이 transition 계열(`transition`·`transition-duration`)과 animation 계열(`animation`·`animation-duration`) 선언을 둘 다 갖지 않는다',
     fix: '전체 선택자에 `transition-duration`·`animation-duration`을 0에 가깝게 주는 규칙을 둔다',
   },
   {
@@ -125,7 +127,8 @@ export const RULES = [
     engine: 'css',
     level: 'required',
     basis: [B.KRDS_INCLUSION],
-    detect: '`prefers-contrast: more` 또는 `forced-colors: active` 미디어 쿼리가 없다',
+    detect:
+      '대상 CSS의 미디어 쿼리 조건에 `prefers-contrast: more`·`forced-colors: active`가 하나도 없다(공백 무시)',
     fix: '고대비 미디어 쿼리에서 색 토큰을 다시 정의한다',
   },
 

@@ -1,5 +1,6 @@
 import type ts from 'typescript'
 import type { RuleId } from '../../catalog/rules.js'
+import type { SourceFinding } from '../types.js'
 
 /** 대상 레포마다 다른 것. `krds.config.ts`에서 온다. */
 export type StaticConfig = {
@@ -20,15 +21,7 @@ export type StaticContext = {
   globalReducedMotion: boolean
 }
 
-export type StaticFinding = {
-  ruleId: RuleId
-  file: string
-  /** 1부터 센다. */
-  line: number
-  column: number
-  /** 위반한 클래스 토큰·태그 이름·문자열. 식별자 해시의 재료다. */
-  snippet: string
-}
+export type StaticFinding = SourceFinding
 
 export type StaticRule = {
   id: RuleId

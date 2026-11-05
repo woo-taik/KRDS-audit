@@ -1,0 +1,18 @@
+/* ✗ 전역 규칙이 transition만 끄고, animation은 전체 선택자가 아닌 곳에서만 끈다 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    transition-duration: 0.01ms !important;
+  }
+
+  dialog {
+    animation: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  * {
+    animation-duration: 0.2s;
+  }
+}

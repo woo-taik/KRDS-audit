@@ -1,0 +1,5 @@
+@media screen and (forced-colors:active) {
+  .badge {
+    border: 1px solid CanvasText;
+  }
+}

@@ -1,0 +1,14 @@
+@import 'tailwindcss';
+
+@theme {
+  --text-xs: 0.8125rem;
+  --text-xs--line-height: 18px;
+  --text-xs--letter-spacing: -0.5px;
+  --text-*: initial;
+  --spacing-gutter: 24px;
+}
+
+/* @theme 밖은 토큰이 아니다. */
+:root {
+  --text-legacy: 12px;
+}

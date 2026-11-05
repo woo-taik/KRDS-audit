@@ -1,0 +1,14 @@
+@import 'tailwindcss';
+
+@theme {
+  --text-xs: 13px; /* ✗ */
+  --text-xs--line-height: 18px;
+  --text-base: 1.0625rem;
+  --text-title: clamp(20px, 2vw, 1.75rem); /* ✗ */
+}
+
+@layer theme {
+  @theme inline {
+    --text-caption: 12.5px; /* ✗ */
+  }
+}
