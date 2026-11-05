@@ -1,9 +1,15 @@
 {
   "name": "krds-audit",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": true,
   "description": "React + Tailwind 레포를 KRDS(디지털 정부서비스 UI/UX 가이드라인) 기준으로 검사하는 CLI",
   "type": "module",
+  "bin": {
+    "krds-audit": "dist/cli/bin.js"
+  },
+  "files": [
+    "dist"
+  ],
   "engines": {
     "node": ">=24"
   },
