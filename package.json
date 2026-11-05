@@ -1,0 +1,32 @@
+{
+  "name": "krds-audit",
+  "version": "0.0.0",
+  "private": true,
+  "description": "React + Tailwind 레포를 KRDS(디지털 정부서비스 UI/UX 가이드라인) 기준으로 검사하는 CLI",
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "packageManager": "pnpm@11.17.0",
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "format": "prettier --write ."
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^24.13.2",
+    "eslint": "^10.8.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.6",
+    "prettier": "^3.9.6",
+    "typescript-eslint": "^8.65.0",
+    "vitest": "^4.1.10"
+  },
+  "dependencies": {
+    "typescript": "~6.0.3"
+  }
+}
