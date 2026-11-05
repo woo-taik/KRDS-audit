@@ -1,4 +1,9 @@
+import { compareSourceFindings } from '../compare.js'
 import type { SourceFinding, SourceText } from '../types.js'
+import { fontSizeResolver } from './font-size-resolver.js'
+import { parseCss } from './parse-css.js'
+import { hasGlobalReducedMotion } from './rules/global-reduced-motion.js'
+import { collectThemeTokens } from './theme-tokens.js'
 import type { CssRule } from './types.js'
 
 export type RunCssOptions = {
@@ -17,7 +22,19 @@ export type CssResult = {
 }
 
 export function runCss(sources: readonly SourceText[], options: RunCssOptions): CssResult {
-  void sources
-  void options
-  throw new Error('not implemented')
+  const parsed = sources.map(({ file, text }) => ({ file, root: parseCss(file, text) }))
+  const theme = options.tailwindTheme
+    ? [parseCss(options.tailwindTheme.file, options.tailwindTheme.text)]
+    : []
+
+  return {
+    findings: options.rules
+      .flatMap((rule) => rule.check({ sources: parsed }))
+      .sort(compareSourceFindings),
+    resolveFontSize: fontSizeResolver(
+      collectThemeTokens([...theme, ...parsed.map(({ root }) => root)]),
+    ),
+    // 규칙 목록을 거르더라도 정적 엔진에 넘길 값은 같아야 해서 규칙과 따로 잰다.
+    globalReducedMotion: hasGlobalReducedMotion(parsed),
+  }
 }

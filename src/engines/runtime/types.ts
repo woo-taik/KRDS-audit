@@ -9,6 +9,8 @@ export type PageRuleContext = {
   route: string
   popup: boolean
   viewport: number
+  /** 이 경로의 준비 셀렉터. 규칙이 다시 불러올 때도 이것을 기다린다. */
+  ready: string | null
   config: RuntimeConfig
 }
 

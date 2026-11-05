@@ -39,7 +39,11 @@ const run = async (rule: RuntimeRule, kind: 'fail' | 'pass') => {
   const viewports = fixture.viewports ?? [1280]
   const config: RuntimeConfig = {
     ...TEST_RUNTIME_CONFIG,
-    routes: fixture.routes.map((route) => ({ path: route.path, popup: route.popup ?? false })),
+    routes: fixture.routes.map((route) => ({
+      path: route.path,
+      popup: route.popup ?? false,
+      ready: null,
+    })),
     viewports,
     scenarioViewport: viewports.at(-1) ?? 1280,
     scenarios: { ...TEST_RUNTIME_CONFIG.scenarios, ...fixture.scenarios },

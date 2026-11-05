@@ -13,6 +13,8 @@ export type RouteConfig = {
   path: string
   /** 사이트 골격 없이 따로 여는 창. 공식 배너·검색 진입 규칙에서 뺀다. */
   popup: boolean
+  /** 이 경로만의 준비 셀렉터(스트림이 끝나야 다 그리는 화면). null이면 `runtime.ready`다. */
+  ready: string | null
 }
 
 export type SearchScenario = {
@@ -29,6 +31,11 @@ export type ConditionScenario = {
   steps: ScenarioStep[]
   /** 조건을 건 뒤 결과 화면에 보여야 할 조건 라벨. */
   labels: string[]
+  /**
+   * 라벨을 찾을 자리(적용된 조건을 보이는 곳). 라벨이 탭·메뉴 이름과 같으면 화면 전체에서 찾을 때
+   * 엉뚱한 글에 걸려 통과하므로 적어 두는 편이 낫다. null이면 화면 전체다.
+   */
+  area: string | null
   /** 조건을 한 번에 해제하는 컨트롤. */
   reset: string
 }
@@ -43,6 +50,13 @@ export type RuntimeConfig = {
   height: number
   /** 포커스 검사에서 Tab을 누르는 최대 횟수. */
   maxTabStops: number
+  /**
+   * 열거나 다시 불러올 때마다 이것이 보일 때까지 기다린다. SPA는 `load` 뒤에 그리므로 이것 없이 재면
+   * 빈 화면을 잰다. null이면 `load`와 글꼴 준비까지만 기다린다.
+   */
+  ready: string | null
+  /** 준비 셀렉터와 시나리오 단계 하나를 기다리는 최대 시간(ms). */
+  timeout: number
   /** 이 설정의 셀렉터는 모두 Playwright 셀렉터다 — CSS 외에 `text=…`도 된다. */
   selectors: {
     banner: string

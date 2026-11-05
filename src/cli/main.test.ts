@@ -78,3 +78,39 @@ describe('main', () => {
     ])
   })
 })
+
+describe('main의 화면 검사 실패', () => {
+  it(
+    '화면 검사를 돌리지 못하면 보고서 없이 stderr에 규칙을 쓰고 2다',
+    { timeout: 60_000 },
+    async () => {
+      target = makeTarget({
+        'krds.config.json': JSON.stringify({
+          name: 't',
+          sources: ['src/**/*.tsx'],
+          css: ['src/app.css'],
+          notApplicable: [
+            'krds/search-input-on-results',
+            'krds/search-result-count',
+            'krds/search-scope-shown',
+            'krds/search-reset-conditions',
+          ],
+          runtime: {
+            routes: [{ path: '/' }],
+            viewports: [1280],
+            timeout: 2000,
+            selectors: { banner: 'a', search: 'a', zoomIn: 'a', zoomOut: 'a', textSample: 'p' },
+          },
+        }),
+        'src/app.css': CLEAN_CSS,
+        'src/a.tsx': 'export const A = () => <a href="/x">x</a>',
+      })
+      const r = recorder()
+
+      // 9번 포트에는 아무것도 없다 — 페이지가 뜨지 않는다.
+      expect(await main(['check', target.root, '--url', 'http://127.0.0.1:9'], '/', r.io)).toBe(2)
+      expect(r.err.join('\n')).toMatch(/krds\/.+돌리지 못했다/)
+      expect(r.written).toEqual([])
+    },
+  )
+})

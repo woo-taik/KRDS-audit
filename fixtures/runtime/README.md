@@ -18,6 +18,6 @@
 | zoom-scales-text | 첫 팝업 아닌 경로 | 표본 글자의 `uniqueSelector` |
 | zoom-five-steps | 첫 팝업 아닌 경로 | `:root` |
 | zoom-persists | 다시 연 경로(새로고침한 첫 경로·각 팝업) | `:root` |
-| 검색 시나리오 | 시나리오가 끝난 주소(경로+쿼리) | `:root` |
+| 검색 시나리오 | 시나리오가 끝난 주소의 경로(쿼리 없이) | `:root` |
 
 기대하는 요소에는 id를 달아 셀렉터가 `#id`로 나오게 한다.

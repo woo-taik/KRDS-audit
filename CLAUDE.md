@@ -34,4 +34,4 @@ pnpm만 쓴다.
 ## law 골든
 
 `KRDS_GOLDEN_LAW=C:\dev\law\frontend pnpm test`일 때만 `src/golden/law-golden.test.ts`가 돈다. 기대값(`krds-golden.json`)과 설정(`krds.config.json`)은 law 작업 트리에, 소스는 골든에 적힌 커밋에서 `git show`로 읽는다.
-`snapshot`은 엔진을 다 만든 뒤 한 번 기록한다 — 그 전에는 `verdicts`·`mustFind`만 견준다.
+`snapshot`은 전체 식별자 목록이다. 규칙 판정을 바꾸면 깨지는 것이 맞다 — 바뀐 위반이 의도한 것인지 본 뒤에만 다시 기록한다. 골든을 law의 새 커밋으로 옮길 때도 다시 기록한다.

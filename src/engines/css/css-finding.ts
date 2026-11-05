@@ -11,9 +11,7 @@ export function cssFinding(
   node: Node | null,
   snippet: string,
 ): SourceFinding {
-  void ruleId
-  void file
-  void node
-  void snippet
-  throw new Error('not implemented')
+  const start = node?.source?.start
+
+  return { ruleId, file, line: start?.line ?? 1, column: start?.column ?? 1, snippet }
 }

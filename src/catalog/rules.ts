@@ -140,7 +140,7 @@ export const RULES = [
     level: 'required',
     basis: [B.KRDS_INCLUSION, B.WCAG_RESIZE_TEXT],
     detect:
-      '설정의 확대 버튼을 누르기 전후로 표본 글자 요소의 계산된 font-size 비가 루트 font-size 비와 다르다(허용 오차 ±2%)',
+      '설정의 확대 버튼을 한 번 누른 뒤(가장 크면 축소 버튼) 표본 글자의 계산된 font-size가 그쪽으로 바뀌지 않았거나, 루트 font-size가 바뀐 비율과 2% 넘게 다르다',
     fix: '글자 크기를 rem으로 적어 루트 배율을 따르게 한다',
   },
   {
@@ -213,7 +213,7 @@ export const RULES = [
     level: 'required',
     basis: [B.KRDS_SEARCH],
     detect:
-      '조건을 건 검색 시나리오 뒤 결과 화면에 시나리오가 건 조건 라벨이 하나라도 보이지 않는다',
+      '조건을 건 검색 시나리오 뒤 결과 화면(설정의 area가 있으면 그 안)에 글이 정확히 그 라벨인 보이는 요소가 없는 라벨이 있다',
     fix: '결과 목록 위에 적용된 조건을 칩으로 보인다',
   },
   {
@@ -232,7 +232,7 @@ export const RULES = [
     level: 'recommended',
     basis: [B.WCAG_ANIMATION],
     detect:
-      '`reducedMotion: reduce`로 연 화면에서 계산된 transition-duration·animation-duration이 10ms를 넘는 보이는 요소가 있다',
+      '`reducedMotion: reduce`로 다시 연 화면에서, 보이는 요소의 animation 시간이나 움직이는 속성(색·투명도·그림자 밖)의 transition 시간이 10ms를 넘는다',
     fix: '해당 요소에 `motion-reduce:` 변형을 주거나 전역 규칙을 둔다',
   },
   {

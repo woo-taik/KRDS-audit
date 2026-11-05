@@ -1,4 +1,6 @@
+import { compareSourceFindings } from '../compare.js'
 import type { SourceText } from '../types.js'
+import { parseSource } from './parse-source.js'
 import type { StaticConfig, StaticFinding, StaticRule } from './types.js'
 
 export type RunStaticOptions = {
@@ -16,7 +18,26 @@ export function runStatic(
   sources: readonly SourceText[],
   options: RunStaticOptions,
 ): StaticFinding[] {
-  void sources
-  void options
-  throw new Error('not implemented')
+  const findings: StaticFinding[] = []
+
+  for (const { file, text } of sources) {
+    const context = {
+      file,
+      sourceFile: parseSource(file, text),
+      config: options.config,
+      resolveFontSize: options.resolveFontSize,
+      globalReducedMotion: options.globalReducedMotion,
+    }
+
+    for (const rule of options.rules) findings.push(...rule.check(context))
+  }
+
+  const seen = new Set<string>()
+
+  return findings.sort(compareSourceFindings).filter((finding) => {
+    const key = `${finding.ruleId}\0${finding.file}\0${finding.line}\0${finding.column}`
+    if (seen.has(key)) return false
+    seen.add(key)
+    return true
+  })
 }

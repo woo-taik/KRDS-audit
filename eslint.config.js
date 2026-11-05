@@ -25,5 +25,10 @@ export default tseslint.config(
     files: ['**/*.test.ts'],
     rules: { 'no-restricted-syntax': 'off' },
   },
+  {
+    // 전역(Window)을 넓히는 일은 interface의 선언 병합에만 기대고 type으로는 적을 수 없다.
+    files: ['**/*.d.ts'],
+    rules: { '@typescript-eslint/consistent-type-definitions': 'off' },
+  },
   prettier,
 )

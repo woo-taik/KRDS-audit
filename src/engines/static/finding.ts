@@ -8,9 +8,7 @@ export function findingAt(
   offset: number,
   snippet: string,
 ): StaticFinding {
-  void context
-  void ruleId
-  void offset
-  void snippet
-  throw new Error('not implemented')
+  const { line, character } = context.sourceFile.getLineAndCharacterOfPosition(offset)
+
+  return { ruleId, file: context.file, line: line + 1, column: character + 1, snippet }
 }

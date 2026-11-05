@@ -59,16 +59,55 @@ describe('parseConfig', () => {
 
     expect(config.runtime).toEqual({
       routes: [
-        { path: '/', popup: false },
-        { path: '/pop', popup: true },
+        { path: '/', popup: false, ready: null },
+        { path: '/pop', popup: true, ready: null },
       ],
       viewports: [360, 1280],
       scenarioViewport: 1280,
       height: 900,
       maxTabStops: 200,
+      ready: null,
+      timeout: 30_000,
       selectors: SELECTORS,
       scenarios: { search: null, searchWithConditions: null },
     })
+  })
+
+  it('ready 셀렉터를 받는다', () => {
+    expect(
+      parse({
+        ...MINIMAL,
+        notApplicable: [...CONDITION_RULES, ...SEARCH_RULES],
+        runtime: runtime({ ready: '#main' }),
+      }).runtime?.ready,
+    ).toBe('#main')
+  })
+
+  it('ready 셀렉터를 받는다', () => {
+    expect(
+      parse({
+        ...MINIMAL,
+        notApplicable: [...CONDITION_RULES, ...SEARCH_RULES],
+        runtime: runtime({ ready: '#main' }),
+      }).runtime?.ready,
+    ).toBe('#main')
+  })
+
+  it('조건 시나리오의 area는 생략하면 null이다', () => {
+    const conditions = {
+      steps: [{ action: 'goto', path: '/r?scope=law' }],
+      labels: ['법령'],
+      reset: '#reset',
+    }
+    const parsed = (extra: Record<string, unknown>) =>
+      parse({
+        ...MINIMAL,
+        notApplicable: SEARCH_RULES,
+        runtime: runtime({ scenarios: { searchWithConditions: { ...conditions, ...extra } } }),
+      }).runtime?.scenarios.searchWithConditions?.area
+
+    expect(parsed({})).toBeNull()
+    expect(parsed({ area: '#chips' })).toBe('#chips')
   })
 
   it('notApplicable을 정렬한다', () => {
@@ -129,6 +168,12 @@ describe('parseConfig', () => {
     [
       { ...MINIMAL, runtime: runtime({ routes: [{ path: 'no-slash' }] }) },
       'runtime.routes[0].path',
+    ],
+    [{ ...MINIMAL, runtime: runtime({ ready: '' }) }, 'runtime.ready'],
+    [{ ...MINIMAL, runtime: runtime({ timeout: 0 }) }, 'runtime.timeout'],
+    [
+      { ...MINIMAL, runtime: runtime({ routes: [{ path: '/', ready: '' }] }) },
+      'runtime.routes[0].ready',
     ],
     [
       { ...MINIMAL, runtime: runtime({ selectors: { ...SELECTORS, banner: '' } }) },
