@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <title>fixture</title>
+    
+  </head>
+  <body>
+    <div>
+      <button id="out" type="button" data-zoom-out>글자 축소</button>
+      <button id="in" type="button" data-zoom-in>글자 확대</button>
+    </div>
+    <main id="main"><p id="sample" data-text-sample style="font-size: 1.0625rem">본문 글자</p></main>
+    <script>
+      const STEPS = [80, 90, 100, 115, 130]
+      const saved = 0 ? Number(localStorage.getItem('zoom')) : NaN
+      let index = STEPS.includes(saved) ? STEPS.indexOf(saved) : STEPS.indexOf(100)
+      const apply = () => {
+        document.documentElement.style.fontSize = STEPS[index] + '%'
+        document.getElementById('out').disabled = index === 0
+        document.getElementById('in').disabled = index === STEPS.length - 1
+        if (0) localStorage.setItem('zoom', String(STEPS[index]))
+      }
+      document.getElementById('out').onclick = () => { index = Math.max(0, index - 1); apply() }
+      document.getElementById('in').onclick = () => { index = Math.min(STEPS.length - 1, index + 1); apply() }
+      apply()
+    </script>
+  </body>
+</html>

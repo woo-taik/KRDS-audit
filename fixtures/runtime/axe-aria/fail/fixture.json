@@ -1,0 +1,1 @@
+{ "routes": [{ "path": "/" }], "expect": [{ "route": "/", "viewport": 1280, "selector": "#empty" }, { "route": "/", "viewport": 1280, "selector": "#noalt" }] }

@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <title>fixture</title>
+    <style>
+      @keyframes spin { to { transform: rotate(360deg); } }
+      #spin, #hidden-spin { animation: spin 1s linear infinite; }
+      #fade { transition: transform 0.3s; }
+      #hidden-spin { display: none; }
+      #instant { transition: transform 5ms; }
+    </style>
+    <style>
+      @media (prefers-reduced-motion: reduce) {
+        *, ::before, ::after { animation-duration: 0s !important; transition-duration: 0s !important; }
+      }
+    </style>
+  </head>
+  <body>
+    <main id="main">
+      <span id="spin">●</span>
+      <span id="fade">카드</span>
+      <span id="hidden-spin">숨김</span>
+      <span id="instant">10ms 이하</span>
+    </main>
+  </body>
+</html>

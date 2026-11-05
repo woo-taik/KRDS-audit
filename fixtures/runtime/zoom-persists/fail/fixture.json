@@ -1,0 +1,1 @@
+{ "routes": [{ "path": "/" }, { "path": "/pop", "popup": true }], "expect": [{ "route": "/", "viewport": 1280, "selector": ":root" }, { "route": "/pop", "viewport": 1280, "selector": ":root" }] }

@@ -1,0 +1,1 @@
+{ "routes": [{ "path": "/" }, { "path": "/sub" }, { "path": "/pop", "popup": true }], "viewports": [360, 1280], "expect": [{ "route": "/sub", "viewport": 360, "selector": ":root" }] }

@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <title>fixture</title>
+    
+  </head>
+  <body>
+    <main id="main">
+      <input id="q" name="q" aria-label="검색어" />
+      <section id="results">
+        <p id="count">총 3건</p>
+
+        <ol><li>결과 하나</li><li>결과 둘</li><li>결과 셋</li></ol>
+      </section>
+    </main>
+    <script>
+      document.getElementById("q").value = new URLSearchParams(location.search).get("q") ?? ""
+    </script>
+  </body>
+</html>
